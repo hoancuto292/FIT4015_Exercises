@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trình chiếu hình ảnh</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      transition: background-color 0.5s ease;
+    }
+    .slideshow-container {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    img {
+      width: 400px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+    .controls {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="slideshow-container">
+    <img id="slideshowImage" src="https://via.placeholder.com/400x300" alt="Hình ảnh trình chiếu">
+    <div class="controls">
+      <button onclick="prevImage()">Quay lại</button>
+      <button onclick="nextImage()">Tiếp theo</button>
+    </div>
+  </div>
+
+  <script>
+    const images = [
+      { src: 'https://via.placeholder.com/400x300/ff7f7f', bg: '#ff7f7f' },
+      { src: 'https://via.placeholder.com/400x300/7fbfff', bg: '#7fbfff' },
+      { src: 'https://via.placeholder.com/400x300/7fff7f', bg: '#7fff7f' },
+      { src: 'https://via.placeholder.com/400x300/ffff7f', bg: '#ffff7f' }
+    ];
+
+    let currentIndex = 0;
+    const slideshowImage = document.getElementById('slideshowImage');
+
+    function changeImage(index) {
+      slideshowImage.style.opacity = '0';
+      setTimeout(() => {
+        slideshowImage.src = images[index].src;
+        document.body.style.backgroundColor = images[index].bg;
+        slideshowImage.style.opacity = '1';
+      }, 500); // Thời gian hiệu ứng mờ dần
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      changeImage(currentIndex);
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      changeImage(currentIndex);
+    }
+  </script>
+</body>
+</html>
