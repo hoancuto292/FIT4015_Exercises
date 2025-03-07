@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư viện ảnh</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .gallery {
+            display: flex;
+            gap: 10px;
+        }
+        .thumbnail {
+            width: 100px;
+            cursor: pointer;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .lightbox img {
+            max-width: 500px;
+        }
+        .close-btn {
+            display: block;
+            margin-top: 10px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shop Handmade</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#products">Sản phẩm</a></li>
+                <li><a href="#gallery">Thư viện ảnh</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="gallery">
+        <h2>Thư viện ảnh</h2>
+        <div class="gallery">
+            <img src="thumb1.jpg" class="thumbnail" data-full="full1.jpg">
+            <img src="thumb2.jpg" class="thumbnail" data-full="full2.jpg">
+            <img src="thumb3.jpg" class="thumbnail" data-full="full3.jpg">
+        </div>
+        <div class="lightbox">
+            <img src="" id="largeImage">
+            <span class="close-btn">Đóng</span>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h2>Liên hệ</h2>
+        <form>
+            <input type="text" placeholder="Tên của bạn" required>
+            <input type="email" placeholder="Email của bạn" required>
+            <textarea placeholder="Tin nhắn" required></textarea>
+            <button type="submit">Gửi</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Shop Handmade. All rights reserved.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function(){
+            $('.thumbnail').click(function(){
+                let imgSrc = $(this).attr('data-full');
+                $('#largeImage').attr('src', imgSrc);
+                $('.lightbox').fadeIn();
+            });
+            $('.close-btn').click(function(){
+                $('.lightbox').fadeOut();
+            });
+        });
+    </script>
+</body>
+</html>
